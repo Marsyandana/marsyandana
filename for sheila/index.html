@@ -125,7 +125,9 @@ $('#x').onclick=close;md.onclick=e=>{if(e.target===md)close()};
 function cake(b){b.innerHTML=`<h3>Make a wish 🙏</h3><div class="cake"><div class="fl" id="fl">🔥</div><div class="cd"></div><div class="c1"></div><div class="c2"></div></div><p class="sm" id="ct">Ketuk apinya untuk meniup</p>`;
 $('#fl',b).onclick=e=>{e.target.classList.add('out');$('#ct',b).textContent='Semoga semua yang kamu harapkan tercapai babee ✨';boom(innerWidth/2,innerHeight/2)}}
 
-function foto(b){const ph=D.photos,em=['🌷','🧸','🌙','🍓'];const items=ph.length?ph.map(u=>`<img src="${u}" alt="">`):em.map(e=>`<i>${e}</i>`);const n=items.length;let i=0;
+function foto(b){const ph=D.photos,em=['🌷','🧸','🌙','🍓'];
+const items=ph.length?ph.map(u=>`<img src="${u}" onerror="if(!this.dataset.t){this.dataset.t=1;this.src=this.src.replace('.jpg','.JPG')}" alt="">`):em.map(e=>`<i>${e}</i>`);
+const n=items.length;let i=0;
 b.innerHTML=`<h3>foto kita blurrr~~ 📸</h3><div class="stack" id="st"></div><p class="sm">${ph.length?'Ketuk foto untuk lanjut':'Foto kita akan muncul di sini 🌷'}</p>`;
 const st=$('#st',b);
 function draw(){st.innerHTML='';for(let p=Math.min(n,4)-1;p>=0;p--){const k=(i+p)%n,d=document.createElement('div');d.className='pol';d.innerHTML=items[k];d.style.transform=`translateY(${p*8}px) rotate(${p?((k%2?1:-1)*(2+p*2)):0}deg) scale(${1-p*.04})`;if(!p)d.onclick=()=>{d.style.transform='translateX(130%) rotate(24deg)';d.style.opacity=0;setTimeout(()=>{i=(i+1)%n;draw()},330)};st.append(d)}}
